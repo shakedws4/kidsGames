@@ -1,0 +1,38 @@
+<div class="title" >{{title}}</div>
+<div class="game-wrapper">
+  <div class="board">
+    <div>
+      <div class="letter" (mouseover)="mouseOverLetter(letter)" [style.color]="color" >{{letter || 'x'}}</div>
+      <img alt="arrow" class="arrow" src="../../assets/curved-arrow.png">
+    </div>
+    <table (mousedown)="mouseDown()" (mouseup)=mouseUp() class="table">
+      <tr *ngFor="let si of indexes; let i = index">
+        <td class="square" [style.background-color]="clickedSquare[i + (j*10)] ? color : 'transparent'" (mouseover)="mouseOver(i + (j*10))"
+            (mousedown)="clicked(i + (j*10))"
+            [class.clicked]="clickedSquare[i + (j*10)]"
+            *ngFor="let sj of indexes; let j = index">{{squares[i + (j * 10)]}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="dashboard">
+    <div class="like">
+      <img alt="like" class="like-img" src="../../assets/like.png">
+      <div #counterElement class="counter">{{counter}}</div>
+    </div>
+    <div (click)="shuffleClick()" class="button">
+      {{shuffle}}
+    </div>
+    <div (click)="changeLanguage()" class="button">
+      {{lang}}
+    </div>
+    <div class="button">
+      <span class="color-picker"
+            [cpPosition]="'bottom'"
+            [cpPositionRelativeToArrow]="true"
+            [(colorPicker)]="color">{{changeColorText}}</span>
+    </div>
+    </div>
+</div>
+
+
