@@ -1,0 +1,11 @@
+<div class="container">
+  <div>
+    <div class="language">
+      <div class="button" (click)="setLanguage('en')">English</div>
+      <div class="button" (click)="setLanguage('he')">עִבְרִית</div>
+    </div>
+    <div class="word-container">
+      <div class="cube" *ngFor="let letter of word">{{letter.toUpperCase()}}</div>
+    </div>
+  </div>
+</div>

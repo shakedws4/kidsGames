@@ -1,0 +1,25 @@
+.container {
+  .language {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .word-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .cube {
+      display: flex;
+      align-items: center;
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+      border-radius: 5px;
+      text-align: center;
+      justify-content: center;
+      margin: 5px;
+    }
+  }
+}

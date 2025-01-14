@@ -1,0 +1,86 @@
+<div class="main-wrapper">
+  @if(!publishMode) {
+    <div class="control">
+
+      <div class="design">
+        <label class="subtitle multi-color-text">{{ designColorTitle }}</label>
+        <div class="color-change-controls">
+          @for (color of colors; track color) {
+            <div [style.background-color]="color" class="color-change" (click)="changeColor(color)"></div>
+          }
+        </div>
+
+        <div class="size-change-container">
+          <label class="subtitle multi-color-text">{{ designSizeTitle }}</label>
+          <div class="size-change">
+            <div class="big blue" (click)="bigger(true)">
+              <img class="image" [src]="'../../assets/up_down.svg'" alt="baby" draggable="false">
+            </div>
+            <div class="small yellow" (click)="bigger(false)">
+              <img class="image" [src]="'../../assets/up_down.svg'" alt="baby" draggable="false">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="elements-container">
+        <label class="subtitle multi-color-text">{{ elementsTitle }}</label>
+        <div class="elements-list list">
+          @for( item of elementsNames; track item) {
+            <div class="original" #element (mousedown)="onDragging($event, element, 'sizable actionable')">
+              <img class="image" [src]="'../../assets/'+item+'.png'" alt="baby" draggable="false">
+            </div>
+          }
+          <textarea #input class="original input-text" type="text" placeholder="א,ב,ג"
+                    (mousedown)="onDragging($event, input, 'sizable colorable actionable')"></textarea>
+        </div>
+
+        <label class="subtitle multi-color-text">{{ shapesTitle }}</label>
+        <div class="shapes-list list">
+          <div #circle class="orig-shape purple circle" (mousedown)="onDragging($event, circle, 'sizable actionable backgroundColorable')"></div>
+          <div #square class="orig-shape orange square" (mousedown)="onDragging($event, square, 'sizable actionable backgroundColorable')"></div>
+          <div #rectangle class="orig-shape yellow rectangle" (mousedown)="onDragging($event, rectangle, 'sizable actionable backgroundColorable')"></div>
+        </div>
+
+
+        <label class="subtitle multi-color-text">{{ actionsTitle }}</label>
+        <div class="shapes-list list">
+          <div class="action blue" (click)="addAction('jump')">
+            <img class="image" [src]="'../../assets/up-and-down.svg'" alt="baby" draggable="false">
+          </div>
+          <div class="action green swing" (click)="addAction('swing')">
+            <img class="image" [src]="'../../assets/up-and-down.svg'" alt="baby" draggable="false">
+          </div>
+          <div class="action rotate pink" (click)="addAction('spin')">
+            <img class="image" [src]="'../../assets/rotate.svg'" alt="baby" draggable="false">
+          </div>
+          <div class="action red" (click)="removeAction()">
+            <img class="image" [src]="'../../assets/stop.svg'" alt="baby" draggable="false">
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  }
+
+  <div class="page">
+
+    <div #header class="header backgroundColorable selectable" (click)="selectedElement($event, header)">
+      <div class="header-text">
+        <input #headerInput class="header-input colorable" type="text" (click)="selectedElement($event, headerInput) " [disabled]="publishMode">
+        <span class="header-title multi-color-text">{{ myWebText }}</span>
+      </div>
+      @if(!publishMode) {
+        <div (click)="publish()">
+          <div class="publish green" (click)="publish()">
+            <img class="image" [src]="'../../assets/check.svg'" alt="check" draggable="false">
+          </div>
+        </div>
+      }
+    </div>
+
+    <div #body class="body backgroundColorable selectable" (click)="selectedElement($event, body)"></div>
+  </div>
+
+</div>

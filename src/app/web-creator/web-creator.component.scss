@@ -1,0 +1,382 @@
+/* General Reset */
+.main-wrapper {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  font-family: 'KIDS', sans-serif;
+  height: 100%;
+
+  .control {
+    width: 400px;
+    height: 100%;
+    border-radius: 20px 0 0 20px;
+    background-color: #f5f5f5; /* Light gray background for visibility */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    border-right: 2px solid #ddd;
+
+    .design, .command {
+      padding: 10px;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      font-weight: bold;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .design .color-change-controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .color-change {
+      width: 30px; /* Diameter of the circle */
+      height: 30px;
+      border-radius: 50%; /* Makes the div circular */
+      display: inline-block; /* Makes it inline */
+      margin: 5px;
+      cursor: pointer;
+      border: 1px solid #ddd;
+    }
+
+    .list {
+      display: flex; /* Use flexbox for layout */
+      flex-wrap: wrap; /* Wrap items to the next line when out of space */
+      gap: 10px; /* Add space between items */
+      margin-bottom: 20px; /* Add space below each list */
+    }
+
+    .size-change-container {
+      display: flex;
+      flex-direction: column;
+
+      .size-change {
+        display: flex;
+        flex-direction: row;
+
+        .big, .small {
+         width: 50px;
+         margin-right: 10px;
+         cursor: pointer;
+          border-radius: 50%;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+          &:active {
+            transform: scale(1.2);
+          }
+        }
+
+        .small {
+          transform: rotate(180deg);
+          &:hover {
+            transform: scale(1.1) rotate(180deg);
+          }
+          &:active {
+            transform: scale(1.2) rotate(180deg);
+          }
+        }
+      }
+    }
+
+    .button {
+      width: 75px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: normal;
+      margin: 0;
+      transition: 500ms;
+      &.green {
+        background-color: var(--light-green);
+      }
+      &.blue {
+        background-color: var(--light-blue);
+      }
+      &.pink {
+        background-color: var(--pink);
+      }
+      &.yellow {
+        background-color: var(--yellow);
+      }
+
+      &:hover {
+        transform: scale(1.1);
+        border-color: black;
+      }
+
+      &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+
+    .elements-container {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+
+      .elements-list {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+
+    .input-text {
+      resize: none;
+    }
+
+  }
+
+  .page {
+    width: 100%;
+    border-radius: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* Arrange header and body vertically */
+    background-color: #f8f9f4;
+
+    .publish {
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      margin-right: 20px;
+      border-radius: 50%;
+    }
+
+    .header {
+      height: 50px;
+      border-radius: 0 20px 0 0;
+      width: 100%;
+      background-color: #f0f0f0;
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #ddd;
+      flex-direction: row;
+
+      .header-text {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        justify-content: center;
+
+        .header-title {
+          font-size: 50px;
+          font-weight: bold;
+        }
+
+        .header-input {
+          border: none;
+          height: 50px;
+          width: 330px;
+          margin-right: 30px;
+          font-size: 50px;
+          text-align: end;
+        }
+      }
+    }
+
+    .body {
+      width: 100%;
+      height: 100%;
+      background-color: #f8f9f4;
+      overflow-y: auto;
+      border-radius: 0 0 20px 0;
+    }
+
+    .copy {
+      position: absolute;
+      z-index: 1000;
+      cursor: pointer;
+      border: none;
+      width: 100px;
+    }
+
+    .input-text {
+      width: auto;
+      min-width: 50px;
+      max-width: 100%;
+      padding: 5px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      overflow: hidden;
+      white-space: pre-wrap;
+      resize: none;
+    }
+
+  }
+
+  .action {
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &.swing {
+      transform: rotate(90deg);
+      &:hover {
+        transform: scale(1.1) rotate(90deg);
+      }
+      &:active {
+        transform: scale(1.2) rotate(90deg);
+      }
+    }
+
+    &.rotate {
+      padding: 0;
+      width: 50px;
+      height: 50px;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+    }
+    &:active {
+      transform: scale(1.2);
+    }
+  }
+
+  @keyframes jump {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .jump-action {
+    animation: jump 0.5s ease-in-out infinite;
+  }
+
+  @keyframes swing {
+    0% {
+      transform: rotate(-15deg);
+    }
+    50% {
+      transform: rotate(15deg);
+    }
+    100% {
+      transform: rotate(-15deg);
+    }
+  }
+
+  .swing-action {
+    animation: swing 1s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .spin-action {
+    animation: spin 1s ease-in-out infinite;
+  }
+
+  .original {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 100px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 500ms;
+
+    &:hover {
+      transform: scale(1.1);
+      border-color: black;
+    }
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .selectable {
+    cursor: pointer;
+  }
+
+  .orig-shape {
+    cursor: pointer;
+  }
+
+  .orig-shape {
+    width: 100px;
+    height: 100px;
+    &:hover {
+      transform: scale(1.1);
+      border-color: black;
+    }
+
+    &.circle {
+      border-radius: 50%;
+      border: 1px solid #ccc;
+    }
+
+    &.square {
+      border: 1px solid #ccc;
+    }
+    &.rectangle {
+      height: 50px;
+      border: 1px solid #ccc;
+    }
+  }
+
+  .purple {
+    background-color: var(--purple);
+  }
+  .yellow {
+    background-color: var(--yellow);
+  }
+  .orange {
+    background-color: var(--orange);
+  }
+  .green {
+    background-color: var(--light-green);
+  }
+  .blue {
+    background-color: var(--light-blue);
+  }
+  .pink {
+    background-color: var(--pink);
+  }
+  .red {
+    background-color: red;
+  }
+
+
+}
+
