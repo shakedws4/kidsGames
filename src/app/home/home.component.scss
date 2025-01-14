@@ -1,3 +1,14 @@
 .home-container {
   height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .welcome {
+    margin-top: 50px;
+    font-size: 100px;
+    font-weight: bold;
+
+
+  }
 }

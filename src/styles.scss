@@ -4,10 +4,60 @@
   --white: #ffff;
   --light-grey: #eef1f7;
   --grey: #b0a5ae;
-  --dark-grey: #948c92;
-  --red: #98164c;
+  --dark-grey: #464545;
+  --dark-pink: #98164c;
+  --red: #902828;
   --pink: #e779d0;
   --light-pink: #e5d7e2;
   --purple: #5e5eea;
   --light-purple: #dbdbef;
+  --light-blue: #5389eb;
+  --light-green: #67a276;
+  --yellow: #e8d65a;
+  --orange: #f69960;
+}
+:host {
+  margin: 0;
+}
+
+body {
+  display: block;
+  margin: 0;
+}
+
+.text {
+  font-family: 'KIDS', sans-serif;
+}
+
+.multi-color-text {
+  background-image: linear-gradient(to left, #f199f1, #c07def, blue ,green, yellow, orange, red);
+  background-clip: text;
+  color: transparent;
+}
+
+.button {
+  height: 50px;
+  width: 200px;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 100;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 500ms;
+
+  &:hover {
+    background-color: var(--light-pink);
+  }
+
+  .color-picker {
+    cursor: pointer;
+    border: none;
+    width: 150px;
+    background-color: transparent;
+  }
 }

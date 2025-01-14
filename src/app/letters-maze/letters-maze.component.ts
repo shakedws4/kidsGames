@@ -1,37 +1,48 @@
-import {ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {ColorPickerModule} from 'ngx-color-picker';
 import party from "party-js";
+import {languages} from "../helpers/languages";
+import {HttpClient} from "@angular/common/http";
+import {Subscription, take} from "rxjs";
+import {imagesMappingEn, imagesMappingHe} from "../helpers/images";
 
 @Component({
   selector: 'app-letters-maze',
   standalone: true,
   imports: [
-    NgForOf, ColorPickerModule
+    NgForOf, ColorPickerModule,
   ],
   templateUrl: './letters-maze.component.html',
   styleUrl: './letters-maze.component.scss'
 })
-export class LettersMazeComponent {
+export class LettersMazeComponent implements OnDestroy {
 
-  public title = 'מָבוֹךְ אוֹתִיּוֹת';
+  public title = languages.HE.maze.title;
+  public allLettersString = languages.HE.maze.allLetters;
+  public shuffle = languages.HE.maze.shuffle;
+  public lang = languages.HE.maze.changeLang;
+  public changeColorText = languages.HE.maze.changeColor;
   public squares: string[] = []
   public indexes: number[] = []
   public letter: string = '';
   public relevantIndexes: number[] = [];
   public clickedSquare: boolean[] = [];
   public isMouseDown: boolean = false;
-  public allLettersString = 'אבגדהוזחטיכלמנסעפצקרשת';
-  public shuffle = 'הַחְלֵף אוֹת';
-  public lang = 'הַחְלֵף שָׂפָה';
-  public changeColorText = 'הַחְלֵף צבע';
   public counter = 0;
   public color = '#53b78d';
+  public imgUrl = '';
+  public imagesInCurrentLetter: {link:string}[] = [];
+  private _subs = new Subscription();
 
   @ViewChild('counterElement') counterElement!: ElementRef
 
-  constructor(private _cd: ChangeDetectorRef) {
+  constructor(private _cd: ChangeDetectorRef, private http: HttpClient) {
     this.render();
+  }
+
+  ngOnDestroy(): void {
+    this._subs.unsubscribe();
   }
 
   shuffleClick(): void {
@@ -76,6 +87,31 @@ export class LettersMazeComponent {
     let position = {col: 0, row: 0}
     this.changePath(position);
     this.relevantIndexes = this.getRelevantIndexes();
+
+    this._getImage(this.letter);
+  }
+
+  private _getImage(letter: string): void {
+    console.log(this.isHebrew(), imagesMappingEn[letter], letter)
+    console.log(this.isHebrew(), imagesMappingHe[letter], letter)
+    const key = 'AIzaSyAz7AQOVHXILafUPeU-E0jF-2Go5JuJaWk';
+    const q = this.isHebrew() ?
+      `להדפסה+${imagesMappingHe[letter]}&searchType=image&imgType=lineart&fileType=png,jpg&lr=lang_iw'}`:
+      `animal+for+printing+${imagesMappingEn[letter.toLowerCase()]}&searchType=image&imgType=lineart&fileType=png,jpg&lr=lang_en'}`
+    const url = `https://customsearch.googleapis.com/customsearch/v1?key=${key}&cx=b567d7979bb844e9b&q=${q}`;
+
+    this._subs.add(this.http.get<any>(url).pipe(take(1)).subscribe(data => {
+      this.imagesInCurrentLetter = data?.items.filter((item: any) => item.link.includes('.png') || item.link.includes('.jpg'));
+      const randomInd = Math.floor(Math.random() * this.imagesInCurrentLetter?.length)
+      this.imgUrl = this.imagesInCurrentLetter[randomInd]?.link;
+      this._cd.detectChanges();
+    }));
+
+  }
+
+  public shuffleImage(): void {
+    const randomInd = Math.floor(Math.random() * this.imagesInCurrentLetter?.length)
+    this.imgUrl = this.imagesInCurrentLetter[randomInd]?.link;
   }
 
   playAudio(soundFileName: string){
@@ -102,15 +138,18 @@ export class LettersMazeComponent {
   }
 
   getRandomLetter(letters: string[]) {
-    return letters[Math.floor(Math.random() * letters.length)]
+    return this.getNextLetter(this.letter)
+    // return letters[Math.floor(Math.random() * letters.length)]
+  }
+
+  getNextLetter(currentLetter: string): string {
+    const lettersArray = this.allLettersString.split('');
+    const currentInd = lettersArray.findIndex(l => l === currentLetter);
+    return lettersArray[currentInd + 1] ?? lettersArray[0];
   }
 
   changeLanguage(): void {
-    if (this.isHebrew()) {
-      this.allLettersString = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    } else {
-      this.allLettersString = 'אבגדהוזחטיכלמנסעפצקרשת';
-    }
+    this.allLettersString = languages[this.isHebrew() ? 'EN' : 'HE'].maze.allLetters;
     this.render();
   }
 

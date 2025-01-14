@@ -1,7 +1,16 @@
-<div class="nav-bar">
-  <ul class="bar">
-    <li class="item" *ngFor="let item of navBarItems">
-      <a [href]="item.path">{{item.title}}</a>
-    </li>
-  </ul>
-</div>
+@if(isOpen) {
+  <div class="nav-bar">
+    <header>
+      <button class="close" (click)="isOpen = !isOpen"></button>
+    </header>
+    <ul class="bar">
+      <li class="item" *ngFor="let item of navBarItems">
+        <a [href]="item.path"
+           [class.selected]="item.path === selectedPath"
+           (click)="setSelectedPath(item.path)">
+          <span class="text">{{item.title}}</span>
+          <span class="text">{{item.titleHe}}</span></a>
+      </li>
+    </ul>
+  </div>
+}

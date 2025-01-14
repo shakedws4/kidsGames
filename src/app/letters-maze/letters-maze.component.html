@@ -1,4 +1,4 @@
-<div class="title" >{{title}}</div>
+<div class="title multi-color-text" >{{title}}</div>
 <div class="game-wrapper">
   <div class="board">
     <div>
@@ -14,25 +14,29 @@
       </tr>
     </table>
   </div>
-
-  <div class="dashboard">
-    <div class="like">
-      <img alt="like" class="like-img" src="../../assets/like.png">
-      <div #counterElement class="counter">{{counter}}</div>
-    </div>
-    <div (click)="shuffleClick()" class="button">
-      {{shuffle}}
-    </div>
-    <div (click)="changeLanguage()" class="button">
-      {{lang}}
-    </div>
-    <div class="button">
+  <div class="right-side">
+    <div class="dashboard">
+      <div class="like">
+        <img alt="like" class="like-img" src="../../assets/like.png">
+        <div #counterElement class="counter">{{counter}}</div>
+      </div>
+      <div (click)="shuffleClick()" class="button">
+        {{shuffle}}
+      </div>
+      <div (click)="changeLanguage()" class="button">
+        {{lang}}
+      </div>
+      <div class="button">
       <span class="color-picker"
             [cpPosition]="'bottom'"
             [cpPositionRelativeToArrow]="true"
             [(colorPicker)]="color">{{changeColorText}}</span>
+      </div>
     </div>
+    <div class="image-container" (click)="shuffleImage()">
+      <img class="image" alt="image" [src]="imgUrl">
     </div>
+  </div>
 </div>
 
 

@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
-import {NgForOf} from "@angular/common";
+import {ChangeDetectionStrategy, Component, Input, signal} from '@angular/core';
+import {CommonModule, NgForOf} from "@angular/common";
 import {RouterLink} from "@angular/router";
+import {NavBarItems} from "../helpers/consts";
+import {animate, state, style, transition, trigger} from "@angular/animations";
+import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 interface NavBarItem {
   title: string;
+  titleHe: string;
   path: string;
 }
 @Component({
@@ -10,16 +14,22 @@ interface NavBarItem {
   standalone: true,
   imports: [
     NgForOf,
-    RouterLink
-  ],
+    RouterLink],
   templateUrl: './side-nav.component.html',
-  styleUrl: './side-nav.component.scss'
+  styleUrls: ['./side-nav.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SideNavComponent {
 
-  public navBarItems: NavBarItem[] = [
-    {title: 'home', path: 'home'},
-    {title: 'maze', path: 'maze'}
-  ]
+  @Input() isOpen: boolean = true;
+
+  public navBarItems: NavBarItem[] = NavBarItems;
+  public selectedPath = this.navBarItems[0].path;
+
+  public setSelectedPath(path: string): void {
+    this.selectedPath = path;
+  }
 
 }
+
+

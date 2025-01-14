@@ -2,17 +2,23 @@
   background: linear-gradient(45deg, var(--light-grey) 10%, var(--light-pink) 60%, var(--light-purple) 100%);
   display: flex;
   flex-direction: row;
-  padding-bottom: 20px;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 
   .side-nav-bar {
+    position: absolute;
     width: 400px;
+    z-index: 1;
+    height: 100%;
+    overflow: hidden;
   }
 
   .main {
-    margin-top: 20px;
+    overflow: hidden;
+    margin: 20px;
     background-color: var(--white);
-    width: 1000px;
-    height: 95%;
+    width: 100%;
     border-radius: 20px;
   }
 }
