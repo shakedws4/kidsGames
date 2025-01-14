@@ -60,4 +60,16 @@ body {
     width: 150px;
     background-color: transparent;
   }
+
+  &.menu-button {
+    position: absolute;
+    width:30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: var(--light-blue);
+    top: 10px;
+  }
 }

@@ -92,8 +92,6 @@ export class LettersMazeComponent implements OnDestroy {
   }
 
   private _getImage(letter: string): void {
-    console.log(this.isHebrew(), imagesMappingEn[letter], letter)
-    console.log(this.isHebrew(), imagesMappingHe[letter], letter)
     const key = 'AIzaSyAz7AQOVHXILafUPeU-E0jF-2Go5JuJaWk';
     const q = this.isHebrew() ?
       `להדפסה+${imagesMappingHe[letter]}&searchType=image&imgType=lineart&fileType=png,jpg&lr=lang_iw'}`:

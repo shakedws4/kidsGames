@@ -1,9 +1,11 @@
 .nav-bar {
-  height: 90%;
+  height: 100%;
   background-color: var(--white);
   border-radius: 20px;
   margin: 5px 0 0 5px;
   padding: 10px;
+  border: 1px solid var(--light-blue);
+  box-shadow: var(--light-blue) 0 0 6px;
 
   header {
     display: flex;
@@ -43,12 +45,13 @@
           color: black;
         }
 
-        //&.selected {
-        //  color: var(--red);
-        //}
       }
 
 
     }
+  }
+
+  .menu-button {
+    right: 0;
   }
 }

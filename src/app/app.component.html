@@ -1,7 +1,14 @@
 <div class="games-app">
-  <div class="side-nav-bar">
-    <app-side-nav></app-side-nav>
-  </div>
+  @if (navBarState$$ | async) {
+    <div class="side-nav-bar">
+      <app-side-nav></app-side-nav>
+    </div>
+  } @else {
+    <button class="button menu-button" (click)="toggleNavbarState()">
+      <img ngSrc="assets/menu.png" alt="menu" height="15" width="15">
+    </button>
+  }
+
   <div class="main">
     <router-outlet></router-outlet>
   </div>

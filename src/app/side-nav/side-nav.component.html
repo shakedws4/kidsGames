@@ -1,7 +1,8 @@
-@if(isOpen) {
   <div class="nav-bar">
     <header>
-      <button class="close" (click)="isOpen = !isOpen"></button>
+      <button class="button menu-button" (click)="toggleMenuState()">
+        <img ngSrc="assets/menu.png" alt="menu" height="15" width="15">
+      </button>
     </header>
     <ul class="bar">
       <li class="item" *ngFor="let item of navBarItems">
@@ -13,4 +14,3 @@
       </li>
     </ul>
   </div>
-}
