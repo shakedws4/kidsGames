@@ -34,6 +34,7 @@ export class LettersMazeComponent implements OnDestroy {
   public color = '#53b78d';
   public imgUrl = '';
   public imagesInCurrentLetter: {link:string}[] = [];
+  public key = ''//secretKey;
   private _subs = new Subscription();
 
   @ViewChild('counterElement') counterElement!: ElementRef
@@ -93,11 +94,10 @@ export class LettersMazeComponent implements OnDestroy {
   }
 
   private _getImage(letter: string): void {
-    const key = secretKey;
     const q = this.isHebrew() ?
       `להדפסה+${imagesMappingHe[letter]}&searchType=image&imgType=lineart&fileType=png,jpg&lr=lang_iw'}`:
       `animal+for+printing+${imagesMappingEn[letter.toLowerCase()]}&searchType=image&imgType=lineart&fileType=png,jpg&lr=lang_en'}`
-    const url = `https://customsearch.googleapis.com/customsearch/v1?key=${key}&cx=b567d7979bb844e9b&q=${q}`;
+    const url = `https://customsearch.googleapis.com/customsearch/v1?key=${this.key}&cx=b567d7979bb844e9b&q=${q}`;
 
     this._subs.add(this.http.get<any>(url).pipe(take(1)).subscribe(data => {
       this.imagesInCurrentLetter = data?.items.filter((item: any) => item.link.includes('.png') || item.link.includes('.jpg'));

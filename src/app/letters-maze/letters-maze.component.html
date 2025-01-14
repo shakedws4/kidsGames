@@ -33,9 +33,12 @@
             [(colorPicker)]="color">{{changeColorText}}</span>
       </div>
     </div>
-    <div class="image-container" (click)="shuffleImage()">
-      <img class="image" alt="image" [src]="imgUrl">
-    </div>
+    @if(key) {
+      <div class="image-container" (click)="shuffleImage()">
+        <img class="image" alt="image" [src]="imgUrl">
+      </div>
+    }
+
   </div>
 </div>
 
