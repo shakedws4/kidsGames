@@ -6,6 +6,7 @@ import {languages} from "../helpers/languages";
 import {HttpClient} from "@angular/common/http";
 import {Subscription, take} from "rxjs";
 import {imagesMappingEn, imagesMappingHe} from "../helpers/images";
+import {secretKey} from "../../../../secret";
 
 @Component({
   selector: 'app-letters-maze',
@@ -92,7 +93,7 @@ export class LettersMazeComponent implements OnDestroy {
   }
 
   private _getImage(letter: string): void {
-    const key = 'AIzaSyAz7AQOVHXILafUPeU-E0jF-2Go5JuJaWk';
+    const key = secretKey;
     const q = this.isHebrew() ?
       `להדפסה+${imagesMappingHe[letter]}&searchType=image&imgType=lineart&fileType=png,jpg&lr=lang_iw'}`:
       `animal+for+printing+${imagesMappingEn[letter.toLowerCase()]}&searchType=image&imgType=lineart&fileType=png,jpg&lr=lang_en'}`

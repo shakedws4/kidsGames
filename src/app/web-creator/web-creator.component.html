@@ -31,8 +31,6 @@
               <img class="image" [src]="'../../assets/'+item+'.png'" alt="baby" draggable="false">
             </div>
           }
-          <textarea #input class="original input-text" type="text" placeholder="א,ב,ג"
-                    (mousedown)="onDragging($event, input, 'sizable colorable actionable')"></textarea>
         </div>
 
         <label class="subtitle multi-color-text">{{ shapesTitle }}</label>
@@ -40,6 +38,9 @@
           <div #circle class="orig-shape purple circle" (mousedown)="onDragging($event, circle, 'sizable actionable backgroundColorable')"></div>
           <div #square class="orig-shape orange square" (mousedown)="onDragging($event, square, 'sizable actionable backgroundColorable')"></div>
           <div #rectangle class="orig-shape yellow rectangle" (mousedown)="onDragging($event, rectangle, 'sizable actionable backgroundColorable')"></div>
+          <textarea #input class="original input-text" type="text" placeholder="א,ב,ג"
+                    (mousedown)="onDragging($event, input, 'sizable colorable actionable')"></textarea>
+
         </div>
 
 
